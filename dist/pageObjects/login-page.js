@@ -1,31 +1,22 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.LoginPage = void 0;
-const chai_1 = require("chai");
-const locators = {
-    "username_input": "#user-name",
-    "password_input": "#password",
-    "login_button": "#login-button",
-    "inventory_container": "#inventory_container"
-};
-class LoginPage {
-    navigateToLoginScreen = async () => {
-        return await global.page.goto(global.BASE_URL);
+exports.HomePage = void 0;
+const test_1 = require("@playwright/test");
+class HomePage {
+    constructor() {
+        global.logo = global.page.locator('img[alt="Google"]');
+        global.searchButton = global.page.getByRole('button', { name: 'Google Search' });
+        global.luckyButton = global.page.getByRole('button', { name: 'I\'m Feeling Lucky' });
+    }
+    navigateToHomePage = async () => {
+        await global.page.goto(global.BASE_URL);
+        await global.page.waitForLoadState('networkidle');
     };
-    async verifyLoginPageIsDisplayed() {
-        return (0, chai_1.expect)(await global.page.title()).to.equal('Swag Labs');
-    }
-    async submitLoginForm() {
-        const element = await global.page.waitForSelector(locators.username_input);
-        await global.page.fill(locators.username_input, 'standard_user');
-        await global.page.fill(locators.password_input, 'secret_sauce');
-        await global.page.click(locators.login_button);
-    }
-    async verifyAfterLoginPage() {
-        await global.page.waitForSelector(locators.inventory_container);
-        const visible = await global.page.isVisible(locators.inventory_container);
-        return (0, chai_1.expect)(visible).to.equal(true);
-    }
+    verifyButtonsAreVisible = async () => {
+        await (0, test_1.expect)(global.logo).toBeVisible();
+        await (0, test_1.expect)(global.searchButton).toBeVisible();
+        await (0, test_1.expect)(global.luckyButton).toBeVisible();
+    };
 }
-exports.LoginPage = LoginPage;
-module.exports = { LoginPage };
+exports.HomePage = HomePage;
+module.exports = { HomePage };

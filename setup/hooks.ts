@@ -2,21 +2,16 @@ const playwright = require('playwright');
 const { BeforeAll, Before, After, AfterAll , Status } = require('@cucumber/cucumber');
 const cucumber = require('@cucumber/cucumber');
 import {chromium, Browser, Page, Locator} from 'playwright';
-import { Logger } from "winston";
 
-// const { World } = require('@cucumber/cucumber')
 
 export let browser: Browser;
 export let page: Page;
 
-
-// Launch options.
 const options = {
   headless: true,
   slowMo: 100
 };
 
-// Create a global browser for the test session.
 BeforeAll(async () => {
   console.log('before all ...');
   global.browser = await playwright['firefox'].launch(options);
@@ -27,20 +22,17 @@ AfterAll(async () => {
   await global.browser.close();
 });
 
-// Create a fresh browser context for each test.
 Before(async () => {
   console.log('before ...');
   global.context = await global.browser.newContext();
   global.page = await global.context.newPage();
 });
 
-// close the page and context after each test.
 After(async () => {
   console.log('after pass...');
   await global.page.close();
   await global.context.close();
 });
-
 
 After(async function (scenario) {
   if (scenario.result.status === Status.FAILED) {

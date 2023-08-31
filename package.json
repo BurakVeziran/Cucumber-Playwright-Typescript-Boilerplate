@@ -16,7 +16,7 @@
     "chai": "^4.3.8",
     "cucumber-html-reporter": "^7.1.1",
     "playwright": "^1.37.1",
-    "winston": "^3.10.0"
+    "@playwright/test": "^1.33.0"
   },
   "dependencies": {
     "npm-check-updates": "^16.13.2",

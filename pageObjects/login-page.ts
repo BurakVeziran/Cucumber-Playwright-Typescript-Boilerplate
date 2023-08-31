@@ -1,33 +1,21 @@
-import {expect} from "chai";
- const locators = {
-   "username_input": "#user-name",
-   "password_input": "#password",
-   "login_button": "#login-button",
-   "inventory_container": "#inventory_container"
- }
+import { expect } from "@playwright/test";
+export class HomePage {
+  constructor() {
+    global.logo = global.page.locator('img[alt="Google"]');
+    global.searchButton = global.page.getByRole('button', { name: 'Google Search' });
+    global.luckyButton = global.page.getByRole('button', { name: 'I\'m Feeling Lucky' });
+  }
+  public navigateToHomePage = async () => {
+    await global.page.goto(global.BASE_URL);
+    await global.page.waitForLoadState('networkidle')
 
-export class LoginPage {
-
-  public navigateToLoginScreen = async () => {
-   return await global.page.goto(global.BASE_URL);
   }
 
-  async verifyLoginPageIsDisplayed() {
-   return expect(await global.page.title()).to.equal('Swag Labs');
-  }
-
-  async submitLoginForm() {
-    const element = await global.page.waitForSelector(locators.username_input);
-    await global.page.fill(locators.username_input,'standard_user');
-    await global.page.fill(locators.password_input,'secret_sauce');
-    await global.page.click(locators.login_button);
-  }
-
-  async verifyAfterLoginPage() {
-    await global.page.waitForSelector(locators.inventory_container);
-    const visible = await global.page.isVisible(locators.inventory_container);
-    return expect(visible).to.equal(true);
+  public verifyButtonsAreVisible = async () => {
+    await expect(global.logo).toBeVisible()
+    await expect(global.searchButton).toBeVisible()
+    await expect(global.luckyButton).toBeVisible()
   }
 }
 
-module.exports = { LoginPage };
+module.exports = { HomePage };
