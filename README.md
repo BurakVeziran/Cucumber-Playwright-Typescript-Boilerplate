@@ -1,4 +1,4 @@
-# Playwright-Cucumber-JS E2E Boilerplate
+# Playwright-Cucumber-TS E2E Boilerplate
 
 This boilerplate template provides a foundation for creating end-to-end (E2E) tests using Playwright, Cucumber-JS, and TypeScript. It offers a structured approach to writing E2E tests, incorporating Page-Object design patterns for better maintainability.
 
