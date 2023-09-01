@@ -1,5 +1,5 @@
 const { Given, When , Then } = require('@cucumber/cucumber');
-import { HomePage } from '../pageObjects/login-page';
+import { HomePage } from '../pageObjects/homePage';
 
 let page;
 Given('I am on the home screen', async function() {
