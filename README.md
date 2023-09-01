@@ -65,7 +65,3 @@ Feel free to contribute to this boilerplate template by creating pull requests o
 ## License
 
 This project is licensed under the [MIT License](LICENSE). Feel free to use it in your projects.
-
----
-
-Happy testing with Playwright, Cucumber-JS, and TypeScript! 🚀
